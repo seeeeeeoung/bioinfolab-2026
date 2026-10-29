@@ -44,3 +44,18 @@ Runs in GitHub Codespaces with dev container configs in `.devcontainer/` chosen 
 4. `4-genome` — above + shovill, prokka (weeks 10–11)
 
 `bash .devcontainer/check.sh` shows which tools are available. `$MYHOME` points to the workspace root (bare `cd` returns there). Large sequencing data (`*.fastq*`, `*.sra`) and assembly/annotation output dirs are gitignored and re-downloaded with `wget` when needed.
+
+## 이 수업의 규칙
+
+### 코드를 쓸 때
+- FASTA 파일은 `lab07/src/fasta.py`의 `read_fasta`로 읽는다. 다른 폴더에서는 `sys.path.insert(0, 'lab07/src')`로 경로를 추가한 뒤 `from fasta import read_fasta`로 불러온다.
+- 새 라이브러리(Biopython, pandas 등)를 쓰기 전에 먼저 물어본다.
+- 주석과 출력 메시지는 한국어로 쓴다.
+
+### 하지 말 것
+- `rm`, `mv`로 파일을 지우거나 옮기지 않는다.
+- `pip install`, `apt`, `sudo`로 무언가를 설치하지 않는다.
+- git 명령어(`git add`, `git commit`, `git push`, `git rm`, `git reset` 등)를 실행하지 않는다. git은 사람이 직접 한다.
+
+### 추가로 원하는 것
+- 새 파이썬 스크립트에는 인자 검사(`len(sys.argv)`)와 파일 검사(`os.path.isfile`)를 넣고, 문제가 있으면 사용법이나 오류 메시지를 출력한 뒤 `sys.exit(1)`로 끝낸다.
