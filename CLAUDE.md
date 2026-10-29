@@ -29,6 +29,8 @@ bash ../../lab05/src/fastainfo.sh ../data/seqs.fasta
 
 Python scripts take arguments via `sys.argv` (no argparse) and print a `사용법:` usage message on bad input. Bash scripts use `#!/usr/bin/bash`.
 
+Exception: `check_codespace.sh` (copied into every lab) is run from the lab root as `bash src/check_codespace.sh` and writes `doc/check_result.txt`.
+
 `lab07/src/fasta.py` is a reusable module (`read_fasta`, `gc_content`, `write_fasta`, `reverse_complement`, `length_stats`) imported by sibling scripts via `from fasta import ...` — this only works when running from `lab07/src/`. Its API and known limitations are documented in `lab07/src/README.md`. `read_fasta` returns `{name: SEQ}` with uppercase sequences and only the first word of the header as the name.
 
 ## Style
@@ -48,7 +50,12 @@ Runs in GitHub Codespaces with dev container configs in `.devcontainer/` chosen 
 ## 이 수업의 규칙
 
 ### 코드를 쓸 때
-- FASTA 파일은 `lab07/src/fasta.py`의 `read_fasta`로 읽는다. 다른 폴더에서는 `sys.path.insert(0, 'lab07/src')`로 경로를 추가한 뒤 `from fasta import read_fasta`로 불러온다.
+- FASTA 파일은 `lab07/src/fasta.py`의 `read_fasta`로 읽는다. 다른 폴더에서는 스크립트 위치를 기준으로 경로를 추가한 뒤 불러온다. (`sys.path.insert(0, 'lab07/src')`처럼 상대 경로만 쓰면 저장소 최상위에서 실행할 때만 동작한다.) 예시는 `lab09/src/count_agent2.py`:
+  ```python
+  here = os.path.dirname(os.path.abspath(__file__))
+  sys.path.insert(0, os.path.join(here, "..", "..", "lab07", "src"))
+  from fasta import read_fasta
+  ```
 - 새 라이브러리(Biopython, pandas 등)를 쓰기 전에 먼저 물어본다.
 - 주석과 출력 메시지는 한국어로 쓴다.
 
