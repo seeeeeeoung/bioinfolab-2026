@@ -1,0 +1,4 @@
+data/*.fastq
+doc/shovill*/
+doc/*.html
+doc/*.zip
